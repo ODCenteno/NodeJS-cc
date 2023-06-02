@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Circle Function</title>
   <style>
+    button {
+      display: block;
+    }
+    .message-ball {
+      font-size: 20px;
+      line-height: 200px;
+      text-align: center;
+    }
     .circle {
       transition-property: width, height;
       transition-duration: 2s;
@@ -13,11 +21,6 @@
       transform: translateX(-50%) translateY(-50%);
       background-color: red;
       border-radius: 50%;
-
-      width: 200px;
-      height: 200px;
-      top: 150px;
-      left: 150px;
     }
   </style>
 </head>
@@ -25,7 +28,7 @@
   <div class="circle-container">
     <canvas id="myCanvas"></canvas>
   </div>
-  <button onclick="showCircle(150, 150, 100)">showCircle(150, 150, 100)</button>
+  <button onclick="go()">showCircle(150, 150, 100)</button>
   <script src="./callbackAnimatedCircle.js"></script>
 </body>
 </html>
