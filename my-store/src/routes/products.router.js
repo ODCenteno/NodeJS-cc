@@ -46,5 +46,35 @@ router.get('/:id', (req, res) => {
   }
 });
 
+router.post('/', (req, res) => {
+  // eslint-disable-next-line prefer-destructuring
+  const body = req.body;
+  res.json({
+    message: 'created',
+    data: body,
+  });
+});
+
+router.patch('/:id', (req, res) => {
+  const { id } = req.params;
+  // eslint-disable-next-line no-unused-vars, prefer-destructuring
+  const body = req.body;
+
+  res.json({
+    message: 'patching',
+    data: body,
+    id,
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  res.json({
+    message: 'deleted',
+    id,
+  });
+});
+
 // Exportamos el router que controla todas las peticiones
 module.exports = router;

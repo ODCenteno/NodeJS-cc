@@ -14,9 +14,8 @@ app.get('/about', (req, res) => {
   res.send(title);
 });
 
-// app.get('/products', (req, res) => {
-//   res.send(products);
-// });
+// Middleware para manejar peticiones post en Json
+app.use(express.json());
 
 // Ejecutamos la función del router
 routerApi(app);
