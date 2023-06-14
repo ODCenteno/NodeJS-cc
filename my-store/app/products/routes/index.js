@@ -2,17 +2,13 @@
 const router = require('express').Router();
 // Archivos que controlan todas las rutas y routers
 const productsRouter = require('./products.router');
-const discoverRouter = require('./discover.router');
-const usersRouter = require('./users.router');
 
-function routerApi(app) {
+function productsRouterApi(app) {
   // Generando un Path Global para los endpoints
   app.use('/api/v1', router);
   // para controlar las rutas utilizamos el router con el endpoint primario
   router.use('/products', productsRouter);
-  router.use('/discover', discoverRouter);
-  router.use('/users', usersRouter);
 }
 
 // Exportamos el controlador de las rutas
-module.exports = routerApi;
+module.exports = productsRouterApi;

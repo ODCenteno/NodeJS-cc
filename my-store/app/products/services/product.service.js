@@ -17,8 +17,6 @@ class ProductService {
         price: parseInt(faker.commerce.price(), 10),
         image: faker.image.url(),
       });
-
-      this.lastProductID += 1;
     }
   }
 

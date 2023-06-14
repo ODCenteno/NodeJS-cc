@@ -1,6 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
-const routerApi = require('./src/routes/index');
+const productsRouterApi = require('./products/routes/index');
+const usersRouterApi = require('./users/routes/index');
+const categoriesRouterApi = require('./categories/routes/index');
 
 const app = express();
 
@@ -17,7 +19,9 @@ app.get('/about', (req, res) => {
 app.use(express.json());
 
 // Ejecutamos la función del router
-routerApi(app);
+productsRouterApi(app);
+usersRouterApi(app);
+categoriesRouterApi(app);
 
 // app.listen(port, () => {
 //   console.log(`App listening on port ${port}`);

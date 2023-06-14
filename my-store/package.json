@@ -2,15 +2,15 @@
   "name": "my-store",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./app/index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "nodemon index.js",
+    "dev": "nodemon ./app/server.js",
+    "start": "nodemon ./app/index.js",
     "test": "jest",
     "lint": "eslint"
   },
   "keywords": [],
-  "author": "",
+  "author": "Omar Centeno",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",

@@ -5,21 +5,21 @@ const ProductService = require('../services/product.service');
 
 const service = new ProductService();
 
-router.get('/', (req, res) => {
-  const products = service.find();
+router.get('/', async (req, res) => {
+  const products = await service.find();
   res.json(products);
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
   // const parsedId = parseInt(id, 10);
 
   // if (Number.isNaN(parsedId)) {
   //   res.status(400).json({ error: `Invalid product id: ${id}, is not a valid id` });
   //   return;
-  // }
+  // }444
 
-  const requestedProduct = service.findOne(id);
+  const requestedProduct = await service.findOne(id);
 
   if (!(requestedProduct === -1)) {
     res.json(requestedProduct);
@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // eslint-disable-next-line prefer-destructuring
   const body = req.body;
   res.status(201).json({
@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
   });
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
   const { id } = req.params;
   // eslint-disable-next-line no-unused-vars, prefer-destructuring
   const body = req.body;
