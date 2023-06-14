@@ -1,43 +1,28 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const router = require('express').Router();
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { faker } = require('@faker-js/faker');
+// importamos la clase que maneja el servicio de productos
+const ProductService = require('../services/product.service');
 
-// Utilizamos el router en lugar de la app
-// Quitamos de la URL /products y queda .../ruta
-const productList = [];
-let productId = 1;
+const service = new ProductService();
 
 router.get('/', (req, res) => {
-  const { size } = req.query;
-  const limitSize = size || 10;
-
-  for (let i = 0; i < limitSize; i += 1) {
-    productList.push({
-      productId,
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.url(),
-    });
-
-    productId += 1;
-  }
-  res.json(productList);
+  const products = service.find();
+  res.json(products);
 });
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  const parsedId = parseInt(id, 10);
+  // const parsedId = parseInt(id, 10);
 
-  if (Number.isNaN(parsedId)) {
-    res.status(400).json({ error: `Invalid product id: ${id}, is not a valid number` });
-    return;
-  }
+  // if (Number.isNaN(parsedId)) {
+  //   res.status(400).json({ error: `Invalid product id: ${id}, is not a valid id` });
+  //   return;
+  // }
 
-  const requestedProduct = productList.find((product) => product.productId === parsedId);
+  const requestedProduct = service.findOne(id);
 
-  if (requestedProduct) {
-    res.json([requestedProduct]);
+  if (!(requestedProduct === -1)) {
+    res.json(requestedProduct);
   } else {
     res.status(404).json({ error: `Product with id: ${id} not found` });
   }
