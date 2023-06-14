@@ -1,9 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
-const routerApi = require('./src/routes');
+const routerApi = require('./src/routes/index');
 
 const app = express();
-const port = 3000;
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -20,6 +19,8 @@ app.use(express.json());
 // Ejecutamos la función del router
 routerApi(app);
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`App listening on port ${port}`);
+// });
+
+module.exports = app;

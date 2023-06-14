@@ -2,7 +2,7 @@
 const { Router } = require('express');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { faker } = require('@faker-js/faker');
-const isValidAnimalType = require('../utils/validAnimals');
+const isValidAnimalType = require('../middlewares/validAnimals');
 
 // Generar una instancia de Routes
 const router = new Router();

@@ -1,10 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { Router } = require('express');
+const router = require('express').Router();
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { faker } = require('@faker-js/faker');
-
-// Generar una instancia de Routes
-const router = new Router();
 
 // Utilizamos el router en lugar de la app
 // Quitamos de la URL /products y queda .../ruta
@@ -49,7 +46,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // eslint-disable-next-line prefer-destructuring
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: 'created',
     data: body,
   });
