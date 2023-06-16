@@ -20,25 +20,46 @@ class ProductService {
     }
   }
 
-  create(size) {
-
+  async create(data) {
+    const newProduct = {
+      id: faker.string.uuid,
+      ...data,
+    };
+    this.productList.push(newProduct);
+    return newProduct;
   }
 
-  find() {
+  async find() {
     return this.productList;
   }
 
-  findOne(id) {
+  async findOne(id) {
     const searchedProduct = this.productList.find((product) => product.productId === id);
     return searchedProduct;
   }
 
-  update() {
-    //
+  async update(id, changes) {
+    const index = this.productList.findIndex((item) => item.productId === id);
+    if (index === -1) {
+      throw new Error('Product not found');
+    }
+    const product = this.productList[index];
+    this.productList[index] = {
+      ...product,
+      ...changes,
+    };
+
+    return this.productList[index];
   }
 
-  delete() {
-    //
+  async delete(id) {
+    const index = this.productList.findIndex((item) => item.productId === id);
+    if (index === -1) {
+      throw new Error('Product not found');
+    }
+
+    this.productList = this.productList.splice(index, 1);
+    return 'Product deleted succesfully';
   }
 }
 

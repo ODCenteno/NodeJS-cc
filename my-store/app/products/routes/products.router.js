@@ -10,21 +10,18 @@ router.get('/', async (req, res) => {
   res.json(products);
 });
 
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  // const parsedId = parseInt(id, 10);
-
-  // if (Number.isNaN(parsedId)) {
-  //   res.status(400).json({ error: `Invalid product id: ${id}, is not a valid id` });
-  //   return;
-  // }444
-
-  const requestedProduct = await service.findOne(id);
-
-  if (!(requestedProduct === -1)) {
-    res.json(requestedProduct);
-  } else {
-    res.status(404).json({ error: `Product with id: ${id} not found` });
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const requestedProduct = await service.findOne(id);
+    res.status(201).json(requestedProduct);
+    // if (!(requestedProduct === -1)) {
+    //   res.json(requestedProduct);
+    // } else {
+    //   res.status(404).json({ error: `Product with id: ${id} not found` });
+    // }
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -35,6 +32,17 @@ router.post('/', async (req, res) => {
     message: 'created',
     data: body,
   });
+});
+
+router.put('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const { body } = req.body;
+  try {
+    const updatedProduct = await service.update(id, body);
+    res.json(updatedProduct);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.patch('/:id', async (req, res) => {
