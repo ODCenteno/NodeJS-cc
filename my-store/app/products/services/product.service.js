@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { faker } = require('@faker-js/faker');
+const boom = require('@hapi/boom');
 
 class ProductService {
   constructor() {
@@ -35,13 +37,17 @@ class ProductService {
 
   async findOne(id) {
     const searchedProduct = this.productList.find((product) => product.productId === id);
-    return searchedProduct;
+    if (searchedProduct === -1) {
+      throw boom.notFound('Product not found');
+    } else {
+      return searchedProduct;
+    }
   }
 
   async update(id, changes) {
     const index = this.productList.findIndex((item) => item.productId === id);
     if (index === -1) {
-      throw new Error('Product not found');
+      throw boom.notFound('Product not found');
     }
     const product = this.productList[index];
     this.productList[index] = {
