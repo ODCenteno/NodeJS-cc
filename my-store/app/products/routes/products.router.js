@@ -1,7 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const router = require('express').Router();
+const validatorHandler = require('../../middlewares/validator.handler');
 // importamos la clase que maneja el servicio de productos
 const ProductService = require('../services/product.service');
+const { getProductSchema, updateProductSchema, createProductSchema } = require('../schemas/product.schema');
 
 const service = new ProductService();
 
@@ -10,61 +12,81 @@ router.get('/', async (req, res) => {
   res.json(products);
 });
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const requestedProduct = await service.findOne(id);
-    res.status(201).json(requestedProduct);
+router.get(
+  '/:id',
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const requestedProduct = await service.findOne(id);
+      res.status(201).json(requestedProduct);
     // if (!(requestedProduct === -1)) {
     //   res.json(requestedProduct);
     // } else {
     //   res.status(404).json({ error: `Product with id: ${id} not found` });
     // }
-  } catch (error) {
-    next(error);
-  }
-});
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
-router.post('/', async (req, res) => {
+router.post(
+  '/',
+  validatorHandler(createProductSchema, 'body'),
+  async (req, res) => {
   // eslint-disable-next-line prefer-destructuring
-  const body = req.body;
-  res.status(201).json({
-    message: 'created',
-    data: body,
-  });
-});
+    const body = req.body;
+    const newProduct = await service.create(body);
+    res.status(201).json(newProduct);
+  },
+);
 
-router.put('/:id', async (req, res, next) => {
-  const { id } = req.params;
-  const { body } = req.body;
-  try {
-    const updatedProduct = await service.update(id, body);
-    res.json(updatedProduct);
-  } catch (error) {
-    next(error);
-  }
-});
+router.put(
+  '/:id',
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    const { id } = req.params;
+    const { body } = req.body;
+    try {
+      const updatedProduct = await service.update(id, body);
+      res.json(updatedProduct);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
-router.patch('/:id', async (req, res) => {
-  const { id } = req.params;
-  // eslint-disable-next-line no-unused-vars, prefer-destructuring
-  const body = req.body;
+router.patch(
+  '/:id',
+  validatorHandler(getProductSchema, 'params'),
+  validatorHandler(updateProductSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      // eslint-disable-next-line no-unused-vars, prefer-destructuring
+      const body = req.body;
+      const product = await service.update(id, body);
+      res.json(product);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
-  res.json({
-    message: 'patching',
-    data: body,
-    id,
-  });
-});
-
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-
-  res.json({
-    message: 'deleted',
-    id,
-  });
-});
+router.delete(
+  '/:id',
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const product = await service.delete(id);
+      res.json(product);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 // Exportamos el router que controla todas las peticiones
 module.exports = router;
