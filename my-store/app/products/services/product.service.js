@@ -24,7 +24,7 @@ class ProductService {
 
   async create(data) {
     const newProduct = {
-      id: faker.string.uuid,
+      id: faker.string.uuid(),
       ...data,
     };
     this.productList.push(newProduct);

@@ -3,11 +3,14 @@ const axios = require('axios').default;
 
 const endpointUri = 'https://api.escuelajs.co/api/v1/users';
 
+let usersList;
+
 const getAllUsers = async (req, res) => {
   try {
     const response = await axios.get(endpointUri);
-    const users = await response.data;
-    res.json(users);
+    const usersData = await response.data;
+    usersList = usersData;
+    res.json(usersData);
     // return users;
   } catch (error) {
     console.error(error);
@@ -15,16 +18,9 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const userExist = async (id) => {
-  const users = await getAllUsers();
-  const exist = users.find((user) => user.id === id);
-  return exist;
-};
-
 const getFilteredUser = async (id) => {
-  const users = await getAllUsers();
-  const filteredUser = users.filter((user) => user.id === id);
+  const filteredUser = usersList.filter((user) => user.id === id);
   return filteredUser;
 };
 
-module.exports = { getAllUsers, userExist, getFilteredUser };
+module.exports = { getAllUsers, usersList, getFilteredUser };

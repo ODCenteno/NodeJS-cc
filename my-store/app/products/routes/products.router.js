@@ -20,11 +20,6 @@ router.get(
       const { id } = req.params;
       const requestedProduct = await service.findOne(id);
       res.status(201).json(requestedProduct);
-    // if (!(requestedProduct === -1)) {
-    //   res.json(requestedProduct);
-    // } else {
-    //   res.status(404).json({ error: `Product with id: ${id} not found` });
-    // }
     } catch (error) {
       next(error);
     }
