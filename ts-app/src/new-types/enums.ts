@@ -1,17 +1,17 @@
 // Los enums permiten definir variables o constantes preestablecidas
-enum ROLES {
+export enum ROLES {
 	ADMIN = 'admin',
 	SELLER = 'seller',
 	CUSTOMER = 'customer',
 }
 
-type User = {
+export type User = {
   username: string;
   role: ROLES;
 }
 
 // Se llama directamente a la constante predeterminada
-const superUser: User = {
+export const superUser: User = {
   username: 'Superastro',
   role: ROLES.ADMIN,
 }
