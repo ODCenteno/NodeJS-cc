@@ -1,5 +1,5 @@
 // En service tenemos la manipulación / métodos: creación, manipulación, etc
-import { Product } from "./products.model";
+import { Product } from "./product.model";
 
 export const products: Product[] = [];
 

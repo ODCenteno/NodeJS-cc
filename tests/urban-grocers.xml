@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:tns="WebServices.WarehouseWsdl">
+  <soap:Body>
+    <tns:checkSupply>
+      <tns:products>
+        <tns:products>
+          <id>1</id>
+          <quantity>1</quantity>
+        </tns:products>
+        <tns:products>
+          <id>6</id>
+          <quantity>1</quantity>
+        </tns:products>
+      </tns:products>
+      <tns:deliveryTime>12</tns:deliveryTime>
+    </tns:checkSupply>
+  </soap:Body>
+</soap:Envelope>
