@@ -1,6 +1,6 @@
 // En service tenemos la manipulación / métodos: creación, manipulación, etc
 import { Product } from "./product.model";
-import { createProductDto, updateProductDto } from "./product.dto";
+import { createProductDto, findProductsDto, updateProductDto } from "./product.dto";
 import { faker } from "@faker-js/faker";
 
 export const products: Product[] = [];
@@ -23,7 +23,7 @@ export const addProduct = (data: createProductDto): Product => {
   return newProduct;
 }
 
-export const updateProduct = (id: string, changes: updateProductDto): Product => {
+export const updateProduct = (id: Product['id'], changes: updateProductDto): Product => {
   const indexItem = products.findIndex(item => item.id === id);
   const prevData = products[indexItem];
   products[indexItem] = {
@@ -33,8 +33,13 @@ export const updateProduct = (id: string, changes: updateProductDto): Product =>
   return products[indexItem];
 }
 
+// buscar productos
+export const findProducts = (dto: findProductsDto): Product[] => {
+
+  return products
+}
+
 // obtener un producto
 
 // Eliminar un producto
 
-// buscar un producto

@@ -7,3 +7,6 @@ export interface createProductDto extends Omit<Product, "id" | "createdAt" | "up
 
 // Utilizando Partial. Define atributos como opcionales
 export interface updateProductDto extends Partial<createProductDto> {}
+
+// Utilizando Readonly para la búsqueda
+export interface findProductsDto extends Readonly<Partial<Product>> {}
