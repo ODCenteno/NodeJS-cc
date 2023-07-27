@@ -8,7 +8,13 @@ export interface Product extends BaseModel {
   // title: string;
   // createdAt: Date;
   title: string;
+  image: string;
+  description: string;
   stock: number;
-  category: Category;
   size?: Sizes;
+  category: Category;
+  color: string;
+  price: string;
+  isNew: boolean;
+  tags: string[];
 }
