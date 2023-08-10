@@ -1,4 +1,6 @@
-# Code from Node.js course
+# Developing with Node.js
+
+This repo is part of my journey to learn backend web development with node.js, and testing with Jest and K6.
 
 ## Tools and dependencies used:
 
@@ -10,3 +12,4 @@
 * DotEnv
 
 ## By ODCenteno
+
