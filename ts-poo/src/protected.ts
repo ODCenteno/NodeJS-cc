@@ -1,4 +1,4 @@
-class Animal {
+export class Animal {
   constructor(
     // protected members are only visible to subclasses of the class they’re declared in.
     private _animalName: string = 'Pingu',
@@ -11,7 +11,7 @@ class Animal {
   }
 }
 
-class Snake extends Animal {
+export class Snake extends Animal {
   static move(): void {
     console.log('move on!');
   }
