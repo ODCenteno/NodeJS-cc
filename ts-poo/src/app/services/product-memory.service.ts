@@ -2,9 +2,10 @@
 import { Product } from "../models/products.model";
 import { CreateProductDto, UpdateProductDto } from "../dtos/product.dto";
 import { faker } from "@faker-js/faker";
+import { ProductService } from "../models/product-service.model";
 
 // Migrando las funciones a una clase
-export class ProductMemoryService {
+export class ProductMemoryService implements ProductService {
   private products: Product[] = [];
 
   create(data: CreateProductDto): Product {
@@ -41,7 +42,7 @@ export class ProductMemoryService {
     return this.products;
   }
 
-  findOne(id: Product['id']) {
+  findOne(id: Product['id']): Product | undefined {
     return this.products.find((item) => item.id === id);
   }
 }

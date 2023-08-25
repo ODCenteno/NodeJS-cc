@@ -1,13 +1,14 @@
 import axios from 'axios';
+import { baseUrl } from '../app/utils/base-url';
 
 (
   async () => {
     function getProducts() {
-      const products = axios.get('https://api.escuelajs.co/api/v1/products');
+      const products = axios.get(`${baseUrl}/products`);
       return products;
     }
     async function getUsers() {
-      const { data } = await axios.get('https://api.escuelajs.co/api/v1/users');
+      const { data } = await axios.get(`${baseUrl}/users`);
       return data;
     }
 
