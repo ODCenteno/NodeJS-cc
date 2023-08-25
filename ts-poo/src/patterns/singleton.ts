@@ -1,5 +1,5 @@
 export class Singleton {
-  static instance: Singleton | null = null
+  static instance: Singleton | null = null;
   // el constructor privado solo puede ser utilizado dentro de la clase
   private constructor (public name: string) {}
 

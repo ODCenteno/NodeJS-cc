@@ -42,7 +42,7 @@ export class ProductMemoryService implements ProductService {
     return this.products;
   }
 
-  findOne(id: Product['id']): Product | undefined {
+  findOne(id: Product['id']) {
     return this.products.find((item) => item.id === id);
   }
 }

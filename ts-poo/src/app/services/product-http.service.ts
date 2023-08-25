@@ -6,9 +6,19 @@ import { Product } from "../models/products.model";
 import { baseUrl } from "../utils/base-url";
 
 export class ProductHttpService implements ProductService {
+  // static instance: ProductHttpService | null = null;
+  // private constructor() {}
+
+  // public static getInstance(): ProductHttpService {
+  //   if (ProductHttpService.instance === null) {
+  //     ProductHttpService.instance = new ProductHttpService();
+  //   }
+  //   return ProductHttpService.instance;
+  // }
+  constructor() {};
   async getAll(): Promise<Product[]> {
-      const { data } = await axios.get<Product[]>(`${baseUrl}/products`);
-      return data;
+    const { data } = await axios.get<Product[]>(`${baseUrl}/products`);
+    return data;
   }
   async create(dto: CreateProductDto): Promise<Product> {
     const { data } = await axios.post(`${baseUrl}/products`, dto);
@@ -20,7 +30,7 @@ export class ProductHttpService implements ProductService {
     return data;
     }
 
-  async findOne(id: Product['id']): Promise<Product | undefined> {
+  async findOne(id: Product['id']) {
     const { data } = await axios.get(`${baseUrl}/products/${id}`);
     return data;
   }
