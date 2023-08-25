@@ -1,14 +1,15 @@
+// producto generado con https://quicktype.io/
 export interface Product {
-  id:          number;
+  id:          string;
   title:       string;
-  price:       number;
+  price:       string;
   description: string;
   category:    Category;
   images:      string[];
 }
 
 export interface Category {
-  id:    number;
-  name:  string;
+  categoryId:    string;
+  categoryName:  string;
   image: string;
 }
