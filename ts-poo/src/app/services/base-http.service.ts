@@ -19,12 +19,12 @@ class BaseHttpService<TypeReq> {
 
 (async () => {
   // Definición del tipo personalizado para la clase: Product
-  const ProductService = new BaseHttpService<Product>(baseUrl, '/products');
+  const ProductService = new BaseHttpService<Product>(baseUrl, '/products/');
   const productsRes = await ProductService.getAll();
   console.log('Products', productsRes.length);
 
     // Definición del tipo personalizado para la clase: string
-  const categoryService = new BaseHttpService<string>(baseUrl, '/products/categories');
+  const categoryService = new BaseHttpService<string>(baseUrl, '/categories/');
   const categoriesRes = await categoryService.getAll();
   console.log('Categories', categoriesRes.length);
 })();
